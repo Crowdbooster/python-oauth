@@ -206,12 +206,12 @@ class OAuthRequest(object):
         if self.parameters:
             for k, v in self.parameters.iteritems():
                 if k[:6] == 'oauth_':
-                    auth_header += ', %s="%s"' % (k, escape(str(v)))
+                    auth_header += ', %s="%s"' % (k, escape(_utf8_str(v)))
         return {'Authorization': auth_header}
 
     def to_postdata(self):
         """Serialize as post data for a POST request."""
-        return '&'.join(['%s=%s' % (escape(str(k)), escape(str(v))) \
+        return '&'.join(['%s=%s' % (escape(_utf8_str(k)), escape(_utf8_str(v))) \
             for k, v in self.parameters.iteritems()])
 
     def to_url(self):
